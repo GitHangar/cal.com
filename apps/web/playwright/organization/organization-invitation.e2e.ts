@@ -11,7 +11,7 @@ test.describe.configure({ mode: "parallel" });
 
 test.afterEach(async ({ users, emails }) => {
   await users.deleteAll();
-  emails?.deleteAll();
+  // emails?.deleteAll();
 });
 
 test.describe.serial("Organization", () => {
@@ -460,6 +460,7 @@ async function expectUserToBeAMemberOfTeam({
 }) {
   // Check newly invited member is not pending anymore
   await page.goto(`/settings/teams/${teamId}/members`);
+  await page.reload();
   expect(
     (
       await page.locator(`[data-testid="member-${username}"] [data-testid=member-role]`).textContent()

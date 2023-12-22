@@ -15,7 +15,7 @@ export async function expectInvitationEmailToBeReceived(
   if (!emails) return null;
 
   // eslint-disable-next-line playwright/no-wait-for-timeout
-  await page.waitForTimeout(10000);
+  await page.waitForTimeout(2000);
   const receivedEmails = await getEmailsReceivedByUser({ emails, userEmail });
   expect(receivedEmails?.total).toBe(1);
 

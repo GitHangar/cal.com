@@ -1,4 +1,5 @@
 import { expect } from "@playwright/test";
+import { uuid } from "short-uuid";
 
 import { WEBAPP_URL } from "@calcom/lib/constants";
 
@@ -10,7 +11,7 @@ test.describe.configure({ mode: "parallel" });
 
 test.afterEach(async ({ users, emails }) => {
   await users.deleteAll();
-  emails?.deleteAll();
+  // emails?.deleteAll();
 });
 
 test.describe("Team", () => {
@@ -23,7 +24,7 @@ test.describe("Team", () => {
     await page.waitForLoadState("networkidle");
 
     await test.step("To the team by email (external user)", async () => {
-      const invitedUserEmail = `rick_${Date.now()}@domain-${Date.now()}.com`;
+      const invitedUserEmail = `rick_${uuid()}@domain-${Date.now()}.com`;
       await page.locator(`button:text("${t("add")}")`).click();
       await page.locator('input[name="inviteUser"]').fill(invitedUserEmail);
       await page.locator(`button:text("${t("send_invite")}")`).click();
@@ -104,7 +105,7 @@ test.describe("Team", () => {
     await page.waitForLoadState("networkidle");
 
     await test.step("To the organization by email (internal user)", async () => {
-      const invitedUserEmail = `rick@example.com`;
+      const invitedUserEmail = `rick-${Date.now()}@example.com`;
       await page.locator(`button:text("${t("add")}")`).click();
       await page.locator('input[name="inviteUser"]').fill(invitedUserEmail);
       await page.locator(`button:text("${t("send_invite")}")`).click();

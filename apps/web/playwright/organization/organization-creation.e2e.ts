@@ -7,7 +7,7 @@ import { expectInvitationEmailToBeReceived } from "./expects";
 
 test.afterAll(({ users, emails }) => {
   users.deleteAll();
-  emails?.deleteAll();
+  // emails?.deleteAll();
 });
 
 function capitalize(text: string) {

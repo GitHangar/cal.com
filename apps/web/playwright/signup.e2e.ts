@@ -16,7 +16,7 @@ test.describe("Signup Flow Test", async () => {
   });
   test.afterAll(async ({ users, emails }) => {
     await users.deleteAll();
-    emails?.deleteAll();
+    // emails?.deleteAll();
   });
   test("Username is taken", async ({ page, users }) => {
     // log in trail user
